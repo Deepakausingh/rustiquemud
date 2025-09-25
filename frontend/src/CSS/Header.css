@@ -1,0 +1,347 @@
+/* ==================================== */
+/* 1. CSS VARIABLES (Dark Theme & New Colors) */
+/* ==================================== */
+:root {
+    /* Base Colors */
+    --color-background: #1f2937; /* Dark Slate Gray (Used as base for transparent/glass effect) */
+    --color-foreground: #f3f4f6; /* Off-white (Text) */
+
+    /* Primary Accent Color (Rustic Terracotta) */
+    --color-primary: #e67e22;
+    --color-primary-text: #1f2937; 
+
+    /* Cart Button Green Hover Color */
+    --color-cart-green: #2ecc71; /* A bright, solid green */
+    --color-cart-green-dark: #27ae60;
+
+    /* Muted Colors */
+    --color-muted-foreground: #a1a1a9; 
+    --color-border: #4b5563;
+}
+
+/* ==================================== */
+/* 2. MAIN HEADER LAYOUT & STATE */
+/* ==================================== */
+.header-main {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 50;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease, background-color 0.3s ease;
+    /* Start with a fully transparent background when not scrolled */
+    background-color: transparent; 
+    border-bottom: 1px solid transparent; 
+}
+
+/* Header Visibility (Autohide on Scroll) */
+.header-main.is-hidden {
+    transform: translateY(-100%); 
+}
+.header-main.is-visible {
+    transform: translateY(0); 
+}
+
+/* Scrolled State (Transparent, GLOSSY GLASSMORHISM) */
+.header-main.is-scrolled {
+    /* 🎨 GLOSSY TRANSPARENT BACKGROUND (Glassmorphism) 🎨 */
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5); 
+    border-bottom: 1px solid rgba(230, 126, 34, 0.5); /* Border is slightly more opaque */
+    
+    /* Make the background semi-transparent based on the dark color */
+    background-color: rgba(31, 41, 55, 0.2); /* Reduced opacity to 20% for transparency */
+    
+    /* Apply strong blur for the glossy effect */
+    backdrop-filter: blur(20px); /* Increased blur strength */
+    -webkit-backdrop-filter: blur(20px);
+}
+
+.header-container {
+    width: 100%;
+    max-width: 1280px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+@media (min-width: 640px) {
+    .header-container {
+        padding-top: 1.25rem;
+        padding-bottom: 1.25rem;
+    }
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+/* ==================================== */
+/* 3. LOGO ANIMATION (No changes needed here) */
+/* ==================================== */
+.logo-link {
+    display: flex;
+    align-items: center;
+    height: 2.5rem;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.logo-group {
+    display: flex;
+    align-items: center;
+}
+
+.logo-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    background-color: var(--color-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+    transition: transform 0.5s ease-out; 
+}
+
+.logo-icon.is-hovered {
+    transform: rotate(360deg); 
+}
+
+.logo-text {
+    color: var(--color-primary-text);
+    font-weight: 700;
+    font-size: 1.125rem;
+}
+
+.brand-name {
+    color: var(--color-foreground);
+    font-size: 1.5rem;
+    font-weight: 800;
+    white-space: nowrap;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    transition: all 0.5s ease-out; 
+    transform-origin: left;
+    max-width: 0;
+    margin-left: 0;
+    opacity: 0;
+}
+.brand-name.is-hovered {
+    max-width: 300px; 
+    margin-left: 0.5rem; 
+    opacity: 1;
+}
+
+/* ==================================== */
+/* 4. DESKTOP NAVIGATION (No changes needed here) */
+/* ==================================== */
+.nav-desktop {
+    display: none;
+}
+@media (min-width: 768px) {
+    .nav-desktop {
+        display: flex;
+        align-items: center;
+        gap: 2.5rem;
+    }
+}
+
+.nav-link {
+    position: relative;
+    color: var(--color-foreground);
+    font-weight: 500;
+    font-size: 1rem;
+    transition: color 0.3s; 
+}
+
+.nav-link:hover {
+    color: var(--color-primary); 
+}
+
+.nav-link::before {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0; 
+    height: 2px;
+    background-color: var(--color-primary);
+    transition: width 0.3s; 
+}
+
+.nav-link:hover::before {
+    width: 100%; 
+}
+
+
+/* ==================================== */
+/* 5. DESKTOP ACTIONS & SOCIAL LINKS */
+/* ==================================== */
+.actions-desktop {
+    display: none;
+}
+@media (min-width: 768px) {
+    .actions-desktop {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem; 
+    }
+}
+
+.social-links {
+    display: flex;
+    align-items: center;
+    gap: 1rem; 
+}
+
+.social-link {
+    /* text-muted-foreground hover:text-primary transition-all duration-300 hover:rotate-6 p-1 rounded-full hover:bg-primary/20 hover:shadow-lg */
+    color: var(--color-muted-foreground);
+    transition: all 0.3s ease-in-out; /* Increased transition for smoother glow */
+    padding: 0.25rem;
+    border-radius: 50%;
+}
+
+.social-link:hover {
+    color: var(--color-primary);
+    transform: rotate(6deg) scale(1.1); /* Slightly increased size for better visual feedback */
+    background-color: rgba(230, 126, 34, 0.2); 
+    
+    /* 🌟 ADDED GLOW EFFECT 🌟 */
+    box-shadow: 
+        0 0 5px var(--color-primary),        /* Small, subtle inner glow */
+        0 0 10px var(--color-primary),       /* Medium glow */
+        0 0 20px rgba(230, 126, 34, 0.7);    /* Larger, softer outer glow */
+}
+
+/* 🟢 CART BUTTON STYLES (New Green Hover) 🟢 */
+.btn-cart {
+    /* Base style (assuming Button component sets primary colors) */
+    gap: 0.5rem;
+    background-color: var(--color-primary); /* Base color is still primary */
+    color: var(--color-primary-text);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1); 
+    transition: all 0.3s ease-in-out;
+    border: none;
+    cursor: pointer;
+}
+.btn-cart:hover {
+    /* Hover state: Green background and darker shadow */
+    background-color: var(--color-cart-green); 
+    color: white; /* Ensure text is visible on green */
+    box-shadow: 0 15px 30px -5px rgba(46, 204, 113, 0.5); /* Green shadow */
+    transform: translateY(-1px);
+}
+
+
+/* ==================================== */
+/* 6. MOBILE MENU (Updated background for glass effect) */
+/* ==================================== */
+.menu-toggle-btn {
+    display: block;
+    color: var(--color-foreground);
+    transition: all 0.3s;
+    padding: 0.5rem;
+    border-radius: 50%;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+.menu-toggle-btn:hover {
+    color: var(--color-primary);
+    transform: scale(1.1);
+}
+.menu-toggle-btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--color-primary);
+}
+@media (min-width: 768px) {
+    .menu-toggle-btn {
+        display: none;
+    }
+}
+
+.menu-mobile {
+    display: block;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    
+    /* 🎨 Transparent Glass Effect for Mobile Menu 🎨 */
+    background-color: rgba(31, 41, 55, 0.9); /* Slightly higher opacity for readability */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    
+    border-top: 1px solid rgba(230, 126, 34, 0.2);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+    transition: all 0.5s ease-in-out;
+}
+/* ... (Rest of Mobile Menu styles remain unchanged) ... */
+.menu-mobile.menu-closed {
+    max-height: 0; 
+    opacity: 0;
+    overflow: hidden;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+.menu-mobile.menu-open {
+    max-height: 100vh; 
+    opacity: 1;
+    padding-top: 1rem; 
+    padding-bottom: 1rem; 
+}
+
+.menu-mobile-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.menu-mobile-link {
+    color: var(--color-foreground);
+    font-size: 1.125rem;
+    font-weight: 500;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    transition: color 0.2s;
+    border-bottom: 1px solid var(--color-border);
+}
+.menu-mobile-link:last-child {
+    border-bottom: none;
+}
+.menu-mobile-link:hover {
+    color: var(--color-primary);
+}
+
+.menu-mobile-actions {
+    padding-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.btn-cart-mobile {
+    width: 100%;
+    justify-content: center;
+}
+
+.social-links-mobile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    padding-top: 0.5rem;
+}
+
+.social-link-mobile {
+    color: var(--color-foreground);
+    transition: color 0.3s;
+}
+.social-link-mobile:hover {
+    color: var(--color-primary);
+}

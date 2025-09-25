@@ -1,0 +1,17 @@
+.custom-button {
+  padding: 0.5rem 1rem;           /* px-4 py-2 */
+  border-radius: 0.375rem;        /* rounded-md */
+  border: 1px solid rgba(255,255,255,0.5);
+  background: transparent;
+  color: white;
+  font-family: inherit;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.custom-button:hover {
+  background: rgba(255,255,255,0.2);
+  border-color: white;
+  color: #00ff80;                 /* optional highlight color on hover */
+}

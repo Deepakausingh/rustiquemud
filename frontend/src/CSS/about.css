@@ -1,0 +1,348 @@
+/* about.css */
+
+/* ==================================== */
+/* 1. Global Section Styling & Background */
+/* ==================================== */
+
+.about-section {
+    /* Full width, padding for content separation */
+    padding: 80px 20px;
+    min-height: 80vh; 
+    position: relative; 
+    overflow: hidden; 
+    color: #3d342c; /* Darker text for contrast with brighter blocks */
+    font-family: 'Georgia', serif; 
+}
+
+.about-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 10; 
+}
+
+/* Advanced Background Gradient & Animation */
+.about-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Subtle, earthy, light gradient (Kept subtle to contrast with strong block colors) */
+    background: linear-gradient(135deg, #f7f3ed 0%, #e0d8c7 50%, #f7f3ed 100%);
+    background-size: 400% 400%; 
+    opacity: 1;
+    z-index: 1;
+    animation: gradientShift 20s ease infinite; 
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* ==================================== */
+/* 2. Layout Grid and Columns */
+/* ==================================== */
+
+.about-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr; 
+    gap: 60px;
+    align-items: center;
+}
+
+@media (max-width: 992px) {
+    .about-grid {
+        grid-template-columns: 1fr; 
+    }
+}
+
+/* Initial state for Intersection Observer animations */
+.content-column, .visual-column {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+/* Active state for animation */
+.animate-active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.visual-column.animate-active {
+    transition-delay: 0.3s; 
+}
+
+
+/* ==================================== */
+/* 3. Content Styling */
+/* ==================================== */
+
+.about-title {
+    font-size: 2.5rem;
+    color: #8c5d35; 
+    margin-bottom: 20px;
+    font-weight: bold;
+    border-left: 5px solid #a8794c;
+    padding-left: 15px;
+    letter-spacing: 0.5px;
+}
+
+.story-text p {
+    line-height: 1.8;
+    margin-bottom: 18px;
+    font-size: 1rem;
+    color: #5d574d;
+}
+
+.story-text strong {
+    color: #a8794c;
+    font-weight: bold;
+}
+
+.commitment-text {
+    font-style: italic;
+    padding: 15px;
+    background-color: #ffffffc7;
+    border-radius: 8px;
+    border: 1px solid #e0d8c7;
+    margin-top: 30px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* ==================================== */
+/* 4. Stat Cards (Commitment) - Hover Animation Applied Here as well */
+/* ==================================== */
+
+.stats-container {
+    display: flex;
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.stat-card {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(132, 98, 65, 0.1); 
+    border-top: 5px solid #8c5d35;
+    text-align: center;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    background-color: #fffaf5; /* Slight color change on hover */
+}
+
+.stat-icon {
+    color: #8c5d35;
+    margin-bottom: 10px;
+}
+
+.stat-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #4b443c;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #a8794c;
+    margin-top: 5px;
+}
+
+/* ==================================== */
+/* 5. Visual Elements Styling (Asymmetrical Grid & Hover) */
+/* ==================================== */
+
+.visual-column {
+    position: relative;
+    padding: 20px;
+}
+
+.visual-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr); 
+    gap: 20px;
+    position: relative;
+    z-index: 5;
+    height: 450px; 
+}
+
+.visual-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 15px;
+    border-radius: 15px;
+    text-align: center;
+    min-height: auto; 
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15); /* Stronger shadow */
+    border: none; /* Removed soft border for a cleaner, stronger look */
+    
+    /* Hover Animation Setup */
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* Hover Background Animation */
+.visual-block::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    /* Bright, warm radial gradient for the hover effect */
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0) 70%);
+    transition: width 0.4s ease-out, height 0.4s ease-out;
+    transform: translate(-50%, -50%);
+    z-index: 2; /* Below the content (z-index: 3) */
+}
+
+.visual-block:hover::before {
+    width: 300%;
+    height: 300%;
+}
+
+.visual-block > *, .visual-block .emoji-icon {
+    position: relative;
+    z-index: 3; /* Ensure content stays on top of the hover overlay */
+}
+
+.visual-block:hover {
+    transform: translateY(-8px); /* More pronounced lift */
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+}
+
+/* Asymmetrical Placement */
+
+.visual-block.block-1 {
+    grid-row: 1 / span 2; 
+    grid-column: 1 / 2;
+    /* Strong Color: Deep Terra Cotta */
+    background-color: #a85f40; 
+}
+
+.visual-block.block-2 {
+    grid-row: 1 / 2; 
+    grid-column: 2 / 3;
+    /* Strong Color: Rich Moss Green */
+    background-color: #5d7e63; 
+}
+
+.visual-block.block-3 {
+    grid-row: 3 / 4; 
+    grid-column: 1 / 2;
+    /* Strong Color: Warm Mustard Yellow/Ochre */
+    background-color: #d1b26c; 
+}
+
+.visual-block.block-4 {
+    grid-row: 2 / span 2; 
+    grid-column: 2 / 3;
+    /* Strong Color: Muted Dark Blue/Slate */
+    background-color: #4f596b; 
+}
+
+.block-caption {
+    margin-top: 10px;
+    font-weight: 700;
+    color: #ffffff; /* White text for strong contrast on dark backgrounds */
+    font-size: 1.05rem;
+}
+
+.icon-primary, .icon-accent, .emoji-icon { 
+    color: #ffffff; /* White icons for maximum visibility */
+}
+.emoji-icon { font-size: 2.5rem; }
+
+/* Decorative Bubbles (Floating Elements) */
+.decor-bubble-lg, .decor-bubble-sm {
+    position: absolute;
+    border-radius: 50%;
+    /* Made decor bubbles slightly more visible */
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.1) 70%);
+    opacity: 0.7;
+    z-index: 2;
+}
+
+.decor-bubble-lg {
+    width: 150px;
+    height: 150px;
+}
+
+.decor-bubble-sm {
+    width: 80px;
+    height: 80px;
+}
+
+.animate-float {
+    animation: floatEffect 6s ease-in-out infinite;
+}
+
+@keyframes floatEffect {
+    0% { transform: translate(0, 0); }
+    50% { transform: translate(10px, -15px); }
+    100% { transform: translate(0, 0); }
+}
+
+/* ==================================== */
+/* 6. Mobile Responsiveness */
+/* ==================================== */
+
+@media (max-width: 768px) {
+    .about-section {
+        padding: 60px 15px;
+    }
+
+    .about-title {
+        font-size: 2rem;
+    }
+
+    .stats-container {
+        flex-direction: column; 
+        gap: 15px;
+    }
+
+    .stat-card {
+        padding: 15px;
+    }
+
+    .stat-value {
+        font-size: 1.5rem;
+    }
+    
+    .visual-column {
+        padding: 0;
+        margin-top: 40px;
+    }
+
+    /* Reset the grid layout for mobile to stack blocks normally */
+    .visual-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        height: auto;
+    }
+
+    .visual-block {
+        grid-row: auto; 
+        grid-column: auto;
+        min-height: 120px; 
+    }
+}
