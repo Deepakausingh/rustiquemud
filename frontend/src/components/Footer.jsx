@@ -1,8 +1,83 @@
-import { Instagram, MessageCircle, Mail, Heart, Leaf } from "lucide-react";
+import React from "react";
+import { Instagram, MessageCircle, Mail, Heart, Leaf, Mountain, Send } from "lucide-react";
 
-const Footer = () => {
+// Inline Tailwind Configuration for a Solid Dark, Natural Theme
+/* Color Palette for Dark Mode:
+    natural-primary (Accent): #D99B6A (Light Brown/Burnt Orange)
+    natural-accent (Secondary Accent): #8FD498 (Soft Light Green)
+    natural-bg (Solid Dark BG): #29343B (Dark Slate Blue/Charcoal)
+    natural-text: #F0F4F8 (Light Text)
+*/
+const DARK_BG = '#29343B';
+const LIGHT_TEXT = '#F0F4F8';
+const ACCENT_PRIMARY = '#D99B6A'; 
+const ACCENT_SECONDARY = '#8FD498'; 
+
+const NewsletterSignup = () => {
+  const [email, setEmail] = React.useState('');
+  const [isSubscribed, setIsSubscribed] = React.useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (email) {
+      // Simulate API call
+      console.log('Subscribing:', email);
+      setIsSubscribed(true);
+      setTimeout(() => setIsSubscribed(false), 3000); // Reset message after 3 seconds
+      setEmail('');
+    }
+  };
+
+  return (
+    // Newsletter box has a slightly lighter dark background for contrast
+    <div className="p-6 rounded-2xl shadow-2xl transition-all hover:shadow-xl" style={{ backgroundColor: '#364249', border: '1px solid #4A555E' }}>
+      <h4 className="font-serif text-xl font-bold mb-3 flex items-center" style={{ color: LIGHT_TEXT }}>
+        <Send size={20} className="mr-2" style={{ color: ACCENT_SECONDARY }} />
+        Join the Mud Club
+      </h4>
+      <p className="text-sm text-gray-400 mb-4 leading-relaxed">
+        Get 10% off your first order! Exclusive tips on self-care and sustainable living delivered to your inbox.
+      </p>
+      
+      <form onSubmit={handleSubmit} className="flex flex-col space-y-3">
+        <input 
+          type="email" 
+          placeholder="Your best email address" 
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          // Input field styled for dark theme
+          className="w-full p-3 text-sm text-[#222] bg-white border rounded-xl focus:ring-2 focus:ring-[#8FD498] outline-none transition-all shadow-sm"
+          style={{ borderColor: '#4A555E' }}
+          aria-label="Email for newsletter signup"
+          required
+        />
+        <button 
+          type="submit" 
+          disabled={isSubscribed}
+          // Updated Button: Removed opacity change, added subtle scale and enhanced shadow for a 'glow' effect.
+          className="w-full py-3 font-semibold rounded-xl transition-all shadow-lg shadow-[#D99B6A]/30 active:shadow-none disabled:bg-gray-600 disabled:shadow-none flex items-center justify-center gap-2 hover:scale-[1.01] hover:shadow-2xl hover:shadow-[#D99B6A]/60"
+          style={{ backgroundColor: ACCENT_PRIMARY, color: DARK_BG }}
+        >
+          {isSubscribed ? (
+            <span className="flex items-center gap-2">Subscribed! <Leaf size={16} /></span>
+          ) : (
+            <span className="flex items-center justify-center gap-2">Subscribe Now <Heart size={16} /></span>
+          )}
+        </button>
+      </form>
+    </div>
+  );
+};
+
+const FooterContent = () => {
   const currentYear = new Date().getFullYear();
 
+  // Color Definitions
+  const PRIMARY_BROWN = ACCENT_PRIMARY;
+  const ACCENT_GREEN = ACCENT_SECONDARY;
+  const BG_COLOR = DARK_BG;
+  const TEXT_COLOR = LIGHT_TEXT;
+  
   const footerLinks = {
     products: [
       { name: "Lavender Collection", href: "#" },
@@ -27,141 +102,118 @@ const Footer = () => {
     ]
   };
 
+  const LinkSection = ({ title, links }) => (
+    <div>
+      {/* Title text is light, border is green accent */}
+      <h3 className="font-serif text-lg font-bold mb-5 border-l-4 pl-3" style={{ borderColor: ACCENT_GREEN, color: TEXT_COLOR }}>
+        {title}
+      </h3>
+      <ul className="space-y-3">
+        {links.map((link, index) => (
+          <li key={index}>
+            {/* Link text is light gray, hover is brown/orange accent */}
+            <a 
+              href={link.href}
+              className="text-gray-400 hover:text-[#D99B6A] transition-colors text-base font-light"
+            >
+              {link.name}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+
   return (
-    <footer className="bg-primary/5 border-t border-border/20">
-      <div className="container mx-auto px-4 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-          {/* Brand Section */}
-          <div className="lg:col-span-1">
-            <div className="flex items-center space-x-2 mb-6">
-              <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center">
-                <span className="text-primary-foreground font-display font-bold text-lg">R</span>
+    <footer className="w-full border-t" style={{ backgroundColor: BG_COLOR, borderColor: '#4A555E' }}>
+      <div className="container mx-auto max-w-7xl px-4 md:px-8 py-16 lg:py-20">
+        
+        {/* Main Grid Section */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+          
+          {/* Brand & Mission Section */}
+          <div className="lg:col-span-1 pr-6">
+            <div className="flex items-center space-x-3 mb-6">
+              <div 
+                className="w-10 h-10 rounded-full flex items-center justify-center shadow-md"
+                style={{ backgroundColor: ACCENT_GREEN }}
+              >
+                {/* Icon color adjusted for light background circle */}
+                <Mountain size={20} style={{ color: DARK_BG, fill: DARK_BG }} />
               </div>
-              <span className="font-display text-2xl font-bold text-primary">RustiqueMud</span>
+              {/* Brand name uses primary accent color */}
+              <span className="font-serif text-2xl font-extrabold" style={{ color: PRIMARY_BROWN }}>RustiqueMud</span>
             </div>
             
-            <p className="text-muted-foreground mb-6 leading-relaxed">
-              Handcrafted natural soaps made with love, pure ingredients, and a commitment 
-              to your skin's health and environmental sustainability.
+            {/* Description text color adjusted */}
+            <p className="mb-6 leading-7 text-sm text-gray-400">
+              Handcrafted natural soaps made with pure, earth-derived ingredients, supporting your skin's health and our planet's well-being.
             </p>
 
-            {/* Social Links */}
+            {/* Social Links adjusted for dark background */}
             <div className="flex items-center space-x-4">
               <a 
                 href="https://instagram.com/rustiquemuds" 
-                className="w-10 h-10 rounded-full bg-background border border-border/20 flex items-center justify-center text-muted-foreground hover:text-pink-500 hover:border-pink-500/20 transition-colors"
+                className="w-10 h-10 rounded-full bg-[#364249] border border-[#4A555E] flex items-center justify-center text-gray-400 hover:scale-105 transition-transform duration-300"
                 aria-label="Follow us on Instagram"
               >
-                <Instagram size={18} />
+                <Instagram size={18} className="hover:text-pink-400" />
               </a>
               <a 
                 href="https://wa.me/15551234567" 
-                className="w-10 h-10 rounded-full bg-background border border-border/20 flex items-center justify-center text-muted-foreground hover:text-green-500 hover:border-green-500/20 transition-colors"
+                className="w-10 h-10 rounded-full bg-[#364249] border border-[#4A555E] flex items-center justify-center text-gray-400 hover:scale-105 transition-transform duration-300"
                 aria-label="Message us on WhatsApp"
               >
-                <MessageCircle size={18} />
+                <MessageCircle size={18} className="hover:text-green-400" />
               </a>
               <a 
                 href="mailto:hello@rustiquemuds.com" 
-                className="w-10 h-10 rounded-full bg-background border border-border/20 flex items-center justify-center text-muted-foreground hover:text-blue-500 hover:border-blue-500/20 transition-colors"
+                className="w-10 h-10 rounded-full bg-[#364249] border border-[#4A555E] flex items-center justify-center text-gray-400 hover:scale-105 transition-transform duration-300"
                 aria-label="Send us an email"
               >
-                <Mail size={18} />
+                <Mail size={18} className="hover:text-blue-400" />
               </a>
             </div>
           </div>
 
-          {/* Products Links */}
-          <div>
-            <h3 className="font-display text-lg font-semibold text-foreground mb-4">
-              Products
-            </h3>
-            <ul className="space-y-3">
-              {footerLinks.products.map((link, index) => (
-                <li key={index}>
-                  <a 
-                    href={link.href}
-                    className="text-muted-foreground hover:text-primary transition-colors text-sm"
-                  >
-                    {link.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
+          {/* Link Columns */}
+          <LinkSection title="Products" links={footerLinks.products} />
+          <LinkSection title="Company" links={footerLinks.company} />
+          
+          {/* Newsletter (New) */}
+          <NewsletterSignup />
 
-          {/* Company Links */}
-          <div>
-            <h3 className="font-display text-lg font-semibold text-foreground mb-4">
-              Company
-            </h3>
-            <ul className="space-y-3">
-              {footerLinks.company.map((link, index) => (
-                <li key={index}>
-                  <a 
-                    href={link.href}
-                    className="text-muted-foreground hover:text-primary transition-colors text-sm"
-                  >
-                    {link.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Support Links */}
-          <div>
-            <h3 className="font-display text-lg font-semibold text-foreground mb-4">
-              Support
-            </h3>
-            <ul className="space-y-3">
-              {footerLinks.support.map((link, index) => (
-                <li key={index}>
-                  <a 
-                    href={link.href}
-                    className="text-muted-foreground hover:text-primary transition-colors text-sm"
-                  >
-                    {link.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
         </div>
 
-        {/* Bottom Section */}
-        <div className="border-t border-border/20 pt-8">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            {/* Copyright */}
-            <div className="flex items-center gap-2 text-sm text-muted-foreground">
-              <span>© {currentYear} RustiqueMud. Made with</span>
-              <Heart size={14} className="text-red-500 fill-red-500" />
-              <span>for natural beauty.</span>
-            </div>
+        {/* Bottom Section: Copyright, Values, and Legal */}
+        <div className="pt-8" style={{ borderTop: '1px solid #4A555E' }}>
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
+            
+            {/* Copyright & Values (Flex-start on Mobile, Center on Desktop) */}
+            <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 text-sm text-gray-400">
+              {/* Copyright */}
+              <div className="flex items-center gap-2">
+                <span>© {currentYear} RustiqueMud. Made with</span>
+                <Heart size={14} className="text-red-500 fill-red-500 animate-pulse" />
+                <span>for natural beauty.</span>
+              </div>
 
-            {/* Certifications/Values */}
-            <div className="flex items-center gap-6 text-xs text-muted-foreground">
-              <div className="flex items-center gap-1">
-                <Leaf size={14} className="text-green-500" />
-                <span>100% Natural</span>
-              </div>
-              <div className="flex items-center gap-1">
-                <span>🐰</span>
-                <span>Cruelty-Free</span>
-              </div>
-              <div className="flex items-center gap-1">
-                <span>♻️</span>
-                <span>Eco-Friendly</span>
+              {/* Certifications/Values */}
+              <div className="flex items-center gap-4 text-xs font-medium border-l sm:pl-6" style={{ borderColor: '#4A555E' }}>
+                <div className="flex items-center gap-1" style={{ color: ACCENT_GREEN }}>
+                  <Leaf size={14} />
+                  <span>Natural</span>
+                </div>
+                <div className="flex items-center gap-1 text-gray-400">
+                  <span>🐰</span>
+                  <span>Cruelty-Free</span>
+                </div>
+                <div className="flex items-center gap-1 text-blue-400">
+                  <span>♻️</span>
+                  <span>Eco-Friendly</span>
+                </div>
               </div>
             </div>
-          </div>
-
-          {/* Legal Links */}
-          <div className="flex flex-wrap items-center justify-center gap-6 mt-6 text-xs text-muted-foreground">
-            <a href="#" className="hover:text-primary transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-primary transition-colors">Terms of Service</a>
-            <a href="#" className="hover:text-primary transition-colors">Shipping Policy</a>
-            <a href="#" className="hover:text-primary transition-colors">Returns & Exchanges</a>
           </div>
         </div>
       </div>
@@ -169,4 +221,4 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+export default FooterContent;
