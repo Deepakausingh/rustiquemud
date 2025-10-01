@@ -110,8 +110,6 @@ const Contact = () => {
 
   return (
     <div className="min-h-screen font-sans bg-[#072F29] text-stone-200 relative overflow-hidden">
-      <div className="fixed inset-0 bg-image-blurred z-0"></div>
-      <div className="fixed inset-0 bg-black/40 z-[1]"></div>
 
       <section className="py-20 sm:py-32 md:py-40 relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
         <div className="text-center mb-16">

@@ -1,26 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
+import image1 from "../assets/image1.jpg";
+import image2 from "../assets/image2.jpg";
+import image3 from "../assets/image3.jpg";
+import image4 from "../assets/image4.jpg";
+import ownerImage from "../assets/shilpi.jpg";
 
-// NOTE FOR USER:
-// You MUST update these paths below to correctly point to the location of your
-// four image files in your project's local assets folder (e.g., './assets/soap-heritage.jpg').
-// These variables will then hold the correct image URLs provided by your bundler.
-import image1 from '../assets/image1.jpg';
-import image2 from '../assets/image2.jpg';
-import image3 from '../assets/image3.jpg';
-import image4 from '../assets/image4.jpg';
-
-
-// --- NEW: Background Carousel Component ---
+// Background Carousel
 const BackgroundCarousel = ({ images, duration = 8000 }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
-    // Set up interval to cycle images
     const interval = setInterval(() => {
-      setCurrentImageIndex(prevIndex => (prevIndex + 1) % images.length);
+      setCurrentImageIndex((prev) => (prev + 1) % images.length);
     }, duration);
-    
-    // Cleanup interval on component unmount
     return () => clearInterval(interval);
   }, [images.length, duration]);
 
@@ -29,93 +21,37 @@ const BackgroundCarousel = ({ images, duration = 8000 }) => {
       {images.map((img, index) => (
         <div
           key={index}
-          className={`absolute inset-0 transition-opacity ease-in-out`}
+          className="absolute inset-0 transition-opacity ease-in-out"
           style={{
             backgroundImage: `url(${img})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            // Set opacity based on current index and use a slow transition for fading
+            backgroundSize: "cover",
+            backgroundPosition: "center",
             opacity: index === currentImageIndex ? 1 : 0,
-            transitionDuration: '2000ms', 
-            // Dark filter and deep shadow to ensure card text is always readable
-            filter: 'brightness(0.4) blur(1px)', 
+            transitionDuration: "2000ms",
+            filter: "brightness(0.35) blur(5px)",
           }}
-          // Fallback if image fails
-          onError={(e) => { e.target.style.backgroundImage = 'none'; e.target.style.backgroundColor = '#0A382D'; }}
         />
       ))}
     </div>
   );
 };
 
-
-// Reusable component for the content cards
-const InfoCard = ({ title, content, delay, isFeature = false }) => {
-  const [isHovered, setIsHovered] = useState(false);
-
-  // Custom hover style for the "cool and smooth" lift and shadow effect
-  const hoverStyle = isHovered 
-    ? { 
-        transform: 'translateY(-10px) scale(1.005)', // Subtle lift for the minimalist card
-        boxShadow: '0 30px 80px rgba(100, 150, 100, 0.7)', // Enhanced green glow
-        zIndex: 10 
-      } 
-    : { 
-        transform: 'translateY(0) scale(1)', 
-        boxShadow: '0 5px 20px rgba(0, 0, 0, 0.7)', // Deeper default shadow
-        zIndex: 1
-      };
-      
-  return (
-    <div
-      // MODIFIED: Pure Glassmorphism style (backdrop blur and translucent background)
-      className={`relative p-10 rounded-[2rem] backdrop-blur-3xl bg-white/5 border border-white/20 cursor-pointer animate-fadeIn transition-all duration-500 overflow-hidden`}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      style={{ 
-        ...hoverStyle, 
-        transition: 'transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.5s ease-out',
-        animationDelay: delay, // Staggered fade-in
-      }}
-    >
-      {/* Content Area (Higher Z-index to sit perfectly on top) */}
-      <div className="relative z-10">
-        <h3 className={`font-serif mb-4 font-semibold text-center ${isFeature ? 'text-4xl text-white' : 'text-3xl text-stone-100'}`}>{title}</h3>
-        <p className={`font-sans leading-relaxed text-center ${isFeature ? 'text-lg text-stone-200' : 'text-base text-stone-300'}`}>
-          {content}
-        </p>
-      </div>
-    </div>
-  );
-};
-
-
-// --- Focused About Section component ---
 const AboutSection = () => {
-  // Array of image paths for the background carousel
-  const carouselImages = [
-    image1,
-    image2,
-    image3,
-    image4
-  ];
-  
+  const carouselImages = [image1, image2, image3, image4];
+
   useEffect(() => {
-    // Add fonts and custom CSS animations via a style tag
-    const style = document.createElement('style');
+    const style = document.createElement("style");
     style.innerHTML = `
-      @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@300;400;600&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@300;400;600&display=swap');
       .font-serif { font-family: 'Cormorant Garamond', serif; }
       .font-sans { font-family: 'Inter', sans-serif; }
-      
-      /* Animation definition for the smooth fade-in effect (used on header and cards) */
-      @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(20px); }
+      @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(40px); }
         to { opacity: 1; transform: translateY(0); }
       }
-      .animate-fadeIn {
-        animation: fadeIn 1.2s ease-out forwards;
-        opacity: 0; /* Start invisible */
+      .animate-fadeInUp {
+        animation: fadeInUp 1s ease-out forwards;
+        opacity: 0;
       }
     `;
     document.head.appendChild(style);
@@ -123,66 +59,149 @@ const AboutSection = () => {
       document.head.removeChild(style);
     };
   }, []);
-  
-  return (
-    // Outer wrapper for full screen and base styling
-    <div className="min-h-screen text-stone-200 font-sans">
-      <section 
-        id="about" 
-        // MODIFIED: Base background is now a solid dark color, but the carousel covers it.
-        className="py-24 sm:py-32 md:py-40 relative min-h-screen flex items-center justify-center overflow-hidden bg-[#0A382D]"
-      >
-        {/* NEW: Background Carousel Component */}
-        <BackgroundCarousel images={carouselImages} duration={8000} />
 
-        <div className="max-w-7xl mx-auto px-8 lg:px-12 z-10">
-          
-          {/* Header Section with Fade-In */}
-          <div 
-            className="text-center mb-20 animate-fadeIn" 
-            style={{ animationDelay: '0.2s' }}
-          >
-            <p className="text-lg font-semibold text-orange-300 tracking-widest uppercase mb-4">Rooted in Nature</p>
-            <h2 className="text-6xl sm:text-7xl font-serif text-stone-100 mb-6 font-extrabold leading-snug">
-              The Art of Clean, Conscious Skincare
+  return (
+    <div className="relative min-h-screen text-stone-200 font-sans overflow-hidden">
+      {/* Background Carousel */}
+      <BackgroundCarousel images={carouselImages} duration={8000} />
+
+      <section className="relative min-h-screen py-24 sm:py-32 md:py-40 flex flex-col items-center justify-center z-10">
+        <div className="max-w-6xl mx-auto px-6 lg:px-12 text-center">
+          {/* Hero Section */}
+          <div className="animate-fadeInUp" style={{ animationDelay: "0.2s" }}>
+            <h2
+              className="text-6xl sm:text-7xl font-serif font-extrabold mb-4 tracking-tight drop-shadow-lg 
+                        bg-gradient-to-r from-yellow-400 to-orange-600 bg-clip-text text-transparent leading-tight"
+              style={{ fontFamily: "MyCustomFont", paddingTop: "0.2em", paddingBottom: "0.2em" }}
+            >
+              {process.env.REACT_APP_NAME || "RustiqueMud"}
             </h2>
-            <p className="text-xl text-stone-200 max-w-4xl mx-auto font-sans tracking-wide py-4 mt-8">
-              **Crafted with intention**, sourced with respect. We believe the purest ingredients yield the best results for your skin and the planet, delivered through a heritage of slow, careful production.
+
+            <p className="text-lg sm:text-xl text-orange-300 tracking-wider uppercase">
+              Where Nature Meets Care
             </p>
           </div>
 
-          {/* Cards Layout: Asymmetrical, alternating structure */}
-          <div className="flex flex-col gap-y-16">
-            
-            {/* 1. Feature Block: The Story (Full Width) */}
-            <InfoCard 
-              title="Our Foundational Philosophy: Slow Skincare"
-              content="RustiqueMud was born from a desire to return to basics. Tired of synthetic ingredients, we started hand-blending small batches of soap using only the finest botanicals and earth clays. Our brand is a promise of simplicity, transparency, and connection to nature, celebrating the slow art of traditional soap-making."
-              isFeature={true}
-              delay="0.4s"
-            />
-
-            {/* 2 & 3. Split Block: Ingredients and Process (Two Columns) */}
-            <div className="grid md:grid-cols-1 lg:grid-cols-2 gap-x-12 gap-y-16">
-              <InfoCard 
-                title="Purely Botanical Ingredients"
-                content="We exclusively use ethically-sourced earth clays, cold-pressed botanical oils (like shea butter and olive oil), and natural essential oils. Every ingredient is chosen for its therapeutic properties and gentle action on the skin. You will find no parabens, no sulfates, and no synthetics in our shop, ever."
-                delay="0.6s"
-              />
-              <InfoCard 
-                title="The Cold-Pressed Handcrafted Process"
-                content="Every bar of RustiqueMud soap is mixed, poured, and cut by hand in small, temperature-controlled batches. This artisanal approach ensures the quality, integrity, and potency of our natural ingredients are preserved, resulting in a superior, long-lasting bar."
-                delay="0.8s"
-              />
+          {/* Owner Section */}
+          <div className="flex flex-col-reverse lg:flex-row items-center justify-between max-w-full px-6 lg:px-16 py-16 animate-fadeInUp" style={{ animationDelay: "0.4s" }}>
+            {/* Left: Text Content */}
+            <div className="flex-1 lg:pr-12 mb-12 lg:mb-0 text-left">
+              <h3 className="font-serif text-3xl sm:text-4xl font-semibold drop-shadow-md mb-6"
+                style={{ background: "linear-gradient(90deg, #FFD700, #FF8C00)", WebkitBackgroundClip: "text", color: "transparent" }}
+              >
+                Meet Our Founder – Shilpi Sharma
+              </h3>
+              <p className="text-lg text-stone-200 leading-relaxed max-w-3xl">
+                Rustique Mud is more than just a soap brand — it is a journey of
+                passion, purity, and purpose. Founded in 2018 by{" "}
+                <span className="font-semibold text-white">Shilpi Sharma</span>, our
+                story began with a heartfelt mission: to bring the timeless goodness
+                of nature back into modern self-care.
+              </p>
+              <p className="mt-6 text-lg text-orange-300 font-semibold">
+                Crafted with love, authenticity, and care.
+              </p>
             </div>
 
-            {/* 4. Concluding Block: Sustainability (Full Width) */}
-            <InfoCard 
-              title="Minimal Waste: Conscious Creation"
-              content="Sustainability is at the heart of RustiqueMud. We focus on minimal packaging, use biodegradable materials, and ensure a low carbon footprint in our production process. Our philosophy is minimal waste, maximum benefit for your skin and the planet—a conscious choice for eco-conscious buyers."
-              isFeature={true}
-              delay="1.0s"
-            />
+            {/* Right: Owner Image */}
+            <div className="flex-shrink-0 relative">
+              <div className="relative w-80 h-80 lg:w-96 lg:h-96 rounded-3xl overflow-hidden shadow-2xl hover:scale-105 transition-transform duration-500">
+                <img
+                  src={ownerImage}
+                  alt="Shilpi Sharma"
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+              </div>
+            </div>
+          </div>
+
+          {/* Mission & Philosophy */}
+          <div className="animate-fadeInUp flex flex-col lg:flex-row items-start lg:items-start gap-12 mt-12" style={{ animationDelay: "1.0s" }}>
+            {/* Left: OUR MISSION Text */}
+            <div className="flex-1 text-center lg:text-left">
+              <h3 className="font-serif text-4xl sm:text-5xl font-bold mb-12"
+                style={{ background: "linear-gradient(90deg, #FFD700, #FF8C00)", WebkitBackgroundClip: "text", color: "transparent" }}
+              >
+                OUR MISSION
+              </h3>
+              <div className="space-y-8">
+                <p className="text-lg leading-relaxed text-stone-200 max-w-3xl mx-auto lg:mx-0">
+                  What started as a small experiment in her own home soon
+                  transformed into a brand that celebrates the art of handmade
+                  skincare. Every bar of soap crafted under Rustique Mud carries
+                  with it a piece of nature’s honesty, infused with love, and
+                  shaped with care.
+                </p>
+
+                <h4 className="font-serif text-3xl mb-6 font-semibold"
+                  style={{ background: "linear-gradient(90deg, #FFD700, #FF8C00)", WebkitBackgroundClip: "text", color: "transparent" }}
+                >
+                  Crafted With Heart, From Home
+                </h4>
+                <p className="text-lg leading-relaxed text-stone-100 max-w-3xl mx-auto lg:mx-0">
+                  Unlike mass-produced products, Rustique Mud soaps are homemade
+                  in small batches. Each ingredient is handpicked, each recipe
+                  thoughtfully curated, and each soap bar gently molded to ensure
+                  quality, authenticity, and purity.
+                </p>
+              </div>
+            </div>
+
+            {/* Right: Philosophy Cards */}
+            {/* Right: Philosophy Cards in clover shape */}
+              {/* Right: Philosophy Cards in clover shape */}
+{/* Right: Philosophy Cards in clover shape */}
+<div className="flex-1 grid grid-cols-2 gap-2 lg:gap-2 text-center lg:text-left">
+  {/* Top Left */}
+  <div className="aspect-square bg-white/5 border border-white/10 shadow-lg flex flex-col items-center justify-center rounded-tl-[0] rounded-tr-[50%] rounded-br-[0] rounded-bl-[50%] p-6">
+    <span className="text-2xl">🌿</span>
+    <p className="mt-4 text-lg font-semibold">Pure Ingredients</p>
+    <p className="text-sm text-stone-300">Only natural, skin-loving elements.</p>
+  </div>
+
+  {/* Top Right */}
+  <div className="aspect-square bg-white/5 border border-white/10 shadow-lg flex flex-col items-center justify-center rounded-tr-[0] rounded-tl-[50%] rounded-br-[50%] rounded-bl-[0] p-6">
+    <span className="text-2xl">🤲</span>
+    <p className="mt-4 text-lg font-semibold">Gentle Care</p>
+    <p className="text-sm text-stone-300">No harsh chemicals, no compromises.</p>
+  </div>
+
+  {/* Bottom Left */}
+  <div className="aspect-square bg-white/5 border border-white/10 shadow-lg flex flex-col items-center justify-center rounded-bl-[0] rounded-tr-[0] rounded-tl-[50%] rounded-br-[50%] p-6">
+    <span className="text-2xl">🌎</span>
+    <p className="mt-4 text-lg font-semibold">Sustainable Living</p>
+    <p className="text-sm text-stone-300">Thoughtful choices for you and the planet.</p>
+  </div>
+
+  {/* Bottom Right */}
+  <div className="aspect-square bg-white/5 border border-white/10 shadow-lg flex flex-col items-center justify-center rounded-br-[0] rounded-tl-[0] rounded-tr-[50%] rounded-bl-[50%] p-6">
+    <span className="text-2xl">💧</span>
+    <p className="mt-4 text-lg font-semibold">Eco-Friendly</p>
+    <p className="text-sm text-stone-300">Kind to the environment in every way.</p>
+  </div>
+</div>
+
+
+          </div>
+
+          {/* Closing Section */}
+          <div className="animate-fadeInUp text-center mt-16" style={{ animationDelay: "1.2s" }}>
+            <h3 className="font-serif text-3xl sm:text-4xl font-semibold mb-6"
+              style={{ background: "linear-gradient(90deg, #FFD700, #FF8C00)", WebkitBackgroundClip: "text", color: "transparent" }}
+            >
+              In Your Care Since 2018
+            </h3>
+            <p className="text-lg text-stone-100 max-w-3xl mx-auto leading-relaxed">
+              Every soap we create tells a story — of nature, of craftsmanship,
+              and of care. Since 2018, Rustique Mud has been{" "}
+              <span className="italic text-orange-300">“In Your Care”</span>,
+              offering products that not only nurture your skin but also
+              inspire a conscious way of living.
+            </p>
+            <p className="mt-6 text-xl font-bold text-orange-300 tracking-wide">
+              Rustique Mud — where nature’s simplicity meets the luxury of care.
+            </p>
           </div>
         </div>
       </section>

@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from 'react';
 import { Zap, Feather, Leaf, Heart } from "lucide-react";
-import "../CSS/about.css"; // Link to the dedicated CSS file
 
 const About = () => {
   const contentRef = useRef(null);

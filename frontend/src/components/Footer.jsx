@@ -1,5 +1,6 @@
 import React from "react";
-import { Instagram, MessageCircle, Mail, Heart, Leaf, Mountain, Send } from "lucide-react";
+import { Instagram, MessageCircle, Mail, Heart, Leaf, Send } from "lucide-react";
+import logo from "../assets/Logo/rm2cm.png";
 
 // Inline Tailwind Configuration for a Solid Dark, Natural Theme
 /* Color Palette for Dark Mode:
@@ -134,16 +135,26 @@ const FooterContent = () => {
           {/* Brand & Mission Section */}
           <div className="lg:col-span-1 pr-6">
             <div className="flex items-center space-x-3 mb-6">
-              <div 
-                className="w-10 h-10 rounded-full flex items-center justify-center shadow-md"
-                style={{ backgroundColor: ACCENT_GREEN }}
-              >
-                {/* Icon color adjusted for light background circle */}
-                <Mountain size={20} style={{ color: DARK_BG, fill: DARK_BG }} />
-              </div>
-              {/* Brand name uses primary accent color */}
-              <span className="font-serif text-2xl font-extrabold" style={{ color: PRIMARY_BROWN }}>RustiqueMud</span>
-            </div>
+  <div
+    className="w-10 h-10 rounded-full overflow-hidden flex items-center justify-center shadow-md"
+    style={{ backgroundColor: "transparent"}}
+  >
+    {/* Logo image fully covers the circle */}
+    <img
+      src={logo}
+      alt="Logo"
+      className="w-full h-full object-cover"
+    />
+  </div>
+  {/* Brand name uses primary accent color */}
+  <span
+    className="font-serif text-2xl font-extrabold"
+    style={{ fontFamily: "MyCustomFont" , color: PRIMARY_BROWN }}
+  >
+    {process.env.REACT_APP_NAME}
+  </span>
+</div>
+
             
             {/* Description text color adjusted */}
             <p className="mb-6 leading-7 text-sm text-gray-400">
@@ -154,21 +165,22 @@ const FooterContent = () => {
             <div className="flex items-center space-x-4">
               <a 
                 href="https://instagram.com/rustiquemuds" 
-                className="w-10 h-10 rounded-full bg-[#364249] border border-[#4A555E] flex items-center justify-center text-gray-400 hover:scale-105 transition-transform duration-300"
+                className="w-10 h-10 rounded-full bg-[#364249] border border-[#4A555E] flex items-center justify-center text-gray-400 hover:scale-105 hover:bg-orange-600 hover:text-white transition-transform duration-300"
                 aria-label="Follow us on Instagram"
               >
-                <Instagram size={18} className="hover:text-pink-400" />
+                <Instagram size={18} />
               </a>
+
               <a 
                 href="https://wa.me/15551234567" 
-                className="w-10 h-10 rounded-full bg-[#364249] border border-[#4A555E] flex items-center justify-center text-gray-400 hover:scale-105 transition-transform duration-300"
+                className="w-10 h-10 rounded-full bg-[#364249] border border-[#4A555E] flex items-center justify-center text-gray-400 hover:scale-105 hover:bg-orange-600 hover:text-white transition-transform duration-300"
                 aria-label="Message us on WhatsApp"
               >
                 <MessageCircle size={18} className="hover:text-green-400" />
               </a>
               <a 
                 href="mailto:hello@rustiquemuds.com" 
-                className="w-10 h-10 rounded-full bg-[#364249] border border-[#4A555E] flex items-center justify-center text-gray-400 hover:scale-105 transition-transform duration-300"
+                className="w-10 h-10 rounded-full bg-[#364249] border border-[#4A555E] flex items-center justify-center text-gray-400 hover:scale-105 hover:bg-orange-600 hover:text-white transition-transform duration-300"
                 aria-label="Send us an email"
               >
                 <Mail size={18} className="hover:text-blue-400" />

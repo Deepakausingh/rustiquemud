@@ -4,6 +4,7 @@ import Herosoap from '../assets/hero-soap1.jpg'; // Local background image
 import featuredsoap1 from '../assets/featured-soap1.jpg';
 import featuredsoap2 from '../assets/featured-soap2.jpg';
 import featuredsoap3 from '../assets/featured-soap3.jpg';
+import { Link } from "react-router-dom";
 
 const Button = ({ children, className = '', size = 'md', ...props }) => {
   let padding = 'px-4 py-2';
@@ -39,7 +40,7 @@ const Hero = () => {
           }
         });
       },
-      { threshold: 0.3 }
+      { threshold: 0.1 }
     );
 
     // FIX: Correctly observe both the contentRef and the visualRef
@@ -131,6 +132,7 @@ const Hero = () => {
               <span 
                 // Typing animation classes applied here
                 className="block mt-2 max-w-fit mx-auto overflow-hidden whitespace-nowrap animate-type bg-gradient-to-r from-orange-500 to-yellow-400 bg-clip-text text-transparent"
+                style={{ animationDelay: "0.2s" }}
               >
                 Nature's Touch
               </span>
@@ -145,16 +147,21 @@ const Hero = () => {
             </p>
 
             <div
-              className="mt-10 flex flex-col sm:flex-row justify-center items-center gap-4 animate-fade-in"
-              style={{ animationDelay: "0.6s" }}
-            >
-              <Button size="lg" className="px-10 py-3 font-semibold bg-orange-500 text-white shadow-2xl hover:opacity-90">
-                Explore Our Collection
-              </Button>
-              <Button size="lg" className="px-10 py-3 font-semibold border-2 border-orange-500 text-orange-500 hover:bg-orange-500/10">
-                Learn Our Story
-              </Button>
-            </div>
+                className="mt-10 flex flex-col sm:flex-row justify-center items-center gap-4 animate-fade-in"
+                style={{ animationDelay: "0.6s" }}
+              >
+                <Link to="/gallery">
+                  <Button size="lg" className="px-10 py-3 font-semibold bg-orange-500 text-white shadow-2xl hover:opacity-90">
+                    Explore Our Collection
+                  </Button>
+                </Link>
+
+                <Link to="/about">
+                  <Button size="lg" className="px-10 py-3 font-semibold border-2 border-orange-500 text-orange-500 hover:bg-orange-500/10">
+                    Learn Our Story
+                  </Button>
+                </Link>
+              </div>
 
             <div
               className="mt-16 grid grid-cols-3 gap-12 max-w-3xl mx-auto opacity-90 animate-fade-in"
@@ -330,11 +337,15 @@ const Hero = () => {
         </div>
 
         {/* MODIFIED: Added Go to Gallery button */}
+
         <div className="mt-12">
+          <Link to="/gallery">
             <Button size="lg" className="px-10 py-3 font-semibold bg-gray-800 text-white shadow-2xl hover:bg-gray-700">
-                Go to Full Gallery
+              Go to Full Gallery
             </Button>
+          </Link>
         </div>
+
 
       </section>
 

@@ -4,6 +4,13 @@
   padding: 2rem;
   text-align: center;
 }
+@font-face {
+  font-family: 'MyCustomFont';
+  src: url('./../public/fonts/Myfonts.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 
 .logo {
   height: 6em;
