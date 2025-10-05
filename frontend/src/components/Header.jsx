@@ -81,12 +81,11 @@ const Header = () => {
                 </div>
                 <span
                   style={{ fontFamily: "MyCustomFont" }}
-                  className={`text-gray-100 text-xl font-extrabold whitespace-nowrap flex items-center transition-all duration-500 origin-left ml-0 ${
-                    isLogoHovered ? "max-w-xs ml-2 opacity-100" : "max-w-0 opacity-0"
-                  }`}
+                  className="text-gray-100 text-xl font-extrabold whitespace-nowrap flex items-center transition-all duration-500 origin-left ml-2 max-w-xs opacity-100"
                 >
                   {process.env.REACT_APP_NAME}
                 </span>
+
 
             </div>
 

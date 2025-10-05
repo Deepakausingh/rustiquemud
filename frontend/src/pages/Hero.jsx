@@ -125,7 +125,7 @@ const Hero = () => {
         <div className="relative z-10 w-full max-w-6xl px-6 text-center">
           <div className="max-w-4xl mx-auto">
             <h1
-              className="text-4xl sm:text-6xl lg:text-7xl xl:text-8xl text-white animate-fade-in"
+              className="text-6xl sm:text-6xl lg:text-7xl xl:text-8xl text-white animate-fade-in"
               style={{ animationDelay: "0.2s" , fontFamily: "Flagfies", letterSpacing: "4px"}}
             >
               Handcrafted with
