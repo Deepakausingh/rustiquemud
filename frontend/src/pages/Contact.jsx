@@ -149,8 +149,7 @@ const Contact = () => {
 
           <div className="space-y-10">
             <p className="text-stone-300 leading-relaxed text-lg mb-8">
-              In tempus nisl turpis, ac ultricies dui eleifend a. Quisque et quam vel nunc consectetur pharetra euismod et elit. Morbi nibh tortor, ullamcorper id porta ac, congue consequat velit.
-            </p>
+              Connect with us and experience the touch of nature. Your thoughts, ideas, and feedback help us craft soaps that bring calm, care, and purity to every day.
 
             <div className="grid grid-cols-2 gap-4">
               {contactDetails.map((item, index) => (
