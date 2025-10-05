@@ -4,3 +4,56 @@
   font-weight: normal;
   font-style: normal;
 }
+@font-face {
+  font-family: 'Foga';
+  src: url('./../public/fonts/Foga.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Flagfies';
+  src: url('./../public/fonts/Flagfies.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'NgeticModern';
+  src: url('./../public/fonts/NgeticModern.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Rekalgera';
+  src: url('./../public/fonts/Rekalgera.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Transcity';
+  src: url('./../public/fonts/Transcity.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'concrete';
+  src: url('./../public/fonts/concrete.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Karida';
+  src: url('./../public/fonts/Karida.otf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Zelltin';
+  src: url('./../public/fonts/Zelltin.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+

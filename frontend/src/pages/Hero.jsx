@@ -125,8 +125,8 @@ const Hero = () => {
         <div className="relative z-10 w-full max-w-6xl px-6 text-center">
           <div className="max-w-4xl mx-auto">
             <h1
-              className="text-4xl sm:text-6xl lg:text-7xl xl:text-8xl font-extrabold text-white animate-fade-in"
-              style={{ animationDelay: "0.2s" }}
+              className="text-4xl sm:text-6xl lg:text-7xl xl:text-8xl text-white animate-fade-in"
+              style={{ animationDelay: "0.2s" , fontFamily: "Flagfies", letterSpacing: "4px"}}
             >
               Handcrafted with
               <span 
@@ -140,7 +140,7 @@ const Hero = () => {
 
             <p
               className="mt-6 text-lg md:text-xl text-gray-300 animate-fade-in"
-              style={{ animationDelay: "0.4s" }}
+              style={{ animationDelay: "0.4s" , ontFamily: "concrete"}}
             >
               Discover the <strong>pure luxury</strong> of handmade soaps crafted with natural
               ingredients, essential oils, and love for your skin and the environment.
