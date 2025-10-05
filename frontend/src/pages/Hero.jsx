@@ -214,7 +214,8 @@ const Hero = () => {
           <div className="grid md:grid-cols-[1.2fr_0.8fr] gap-16 items-center">
             {/* Left Column: Content and Stats */}
             <div ref={contentRef} className="opacity-0 translate-y-8 transition-all duration-1000">
-              <h2 className="text-3xl md:text-4xl font-bold text-orange-700 mb-5 border-l-4 border-orange-400 pl-4">
+              <h2 className="text-3xl md:text-4xl text-orange-700 mb-5 border-l-4 border-orange-400 pl-4"
+              style={{ fontFamily: "Flagfies" }}>
                 Our Natural Philosophy
               </h2>
               {/* Updated font size and color for body text */}
@@ -290,7 +291,8 @@ const Hero = () => {
       {/* MODIFIED: Changed background to a continuously moving earthy green gradient */}
       <section className="relative py-24 px-5 md:px-10 overflow-hidden text-center animate-gradient">
         {/* Section Title */}
-        <h3 className="text-4xl font-extrabold text-gray-800 mb-14">
+        <h3 className="text-4xl text-gray-800 mb-14"
+        style={{ fontFamily: "Flagfies" }}>
             Our <span className="text-orange-600">Purest</span> Creations
         </h3>
         
@@ -358,7 +360,8 @@ const Hero = () => {
             
             {/* Wrapper to constrain content width for readability */}
             <div className="max-w-6xl mx-auto">
-                <h3 className="text-4xl md:text-5xl font-extrabold mb-4 leading-tight text-gray-800">
+                <h3 className="text-4xl md:text-5xl mb-4 leading-tight text-gray-800"
+                style={{ fontFamily: "Flagfies" }}>
                     Ready to <span className="text-orange-600">Transform</span> Your Routine?
                 </h3>
                 

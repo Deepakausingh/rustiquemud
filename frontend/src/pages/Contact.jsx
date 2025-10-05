@@ -113,13 +113,15 @@ const Contact = () => {
 
       <section className="py-20 sm:py-32 md:py-40 relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
         <div className="text-center mb-16">
-          <h1 className="text-5xl sm:text-6xl font-serif text-stone-100 font-extrabold leading-snug">Contact Us</h1>
+          <h1 className="text-5xl sm:text-6xl font-serif text-stone-100 leading-snug"
+          style={{ fontFamily: "Flagfies" }}>Contact Us</h1>
           <p className="text-sm text-green-300 tracking-wide mt-2">Home / Contact</p>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20">
           <div className="p-8 bg-white/5 rounded-xl shadow-2xl">
-            <h2 className="text-3xl font-serif text-stone-100 mb-2">Get In Touch</h2>
+            <h2 className="text-3xl font-serif text-stone-100 mb-2"
+            style={{ fontFamily: "Flagfies" , letterSpacing:"2px"}}>Get In Touch</h2>
             <p className="text-green-300 text-lg mb-8">We are here to answer your questions.</p>
             
             <form onSubmit={handleSubmit}>

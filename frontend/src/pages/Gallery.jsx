@@ -286,7 +286,8 @@ const Gallery = () => {
             style={{ animationDelay: '0.2s' }}
           >
             <p className="text-lg font-semibold text-orange-300 tracking-widest uppercase mb-4">Discover Our Collection</p>
-            <h2 className="text-6xl sm:text-7xl font-serif text-stone-100 mb-6 font-extrabold leading-snug">
+            <h2 className="text-6xl sm:text-7xl font-serif text-stone-100 mb-6  leading-snug"
+            style={{ fontFamily: "Flagfies" }}>
               The Finest Handcrafted Soaps
             </h2>
             <p className="text-xl text-stone-200 max-w-4xl mx-auto font-sans tracking-wide py-4 mt-8">
